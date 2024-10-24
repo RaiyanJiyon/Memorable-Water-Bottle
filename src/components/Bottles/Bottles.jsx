@@ -12,15 +12,26 @@ const Bottles = () => {
         .then((jsonData) => setBottles(jsonData))
     } ,[])
 
+    const [cart, setCart] = useState([]);
+
+    const handleAddToCart = (bottle) => {
+        console.log('Added in cart', bottle);
+        const newCart = [...cart, bottle];
+        setCart(newCart);
+    }
+
     return (
         <div>
             <h2>Total Bottles - {bottles.length}</h2>
+            <h3>Add Cart - {cart.length}</h3>
 
+            <div className="bottles">
             {
                 bottles.map((bottle) => (
-                    <Bottle key={bottles.id} bottle={bottle} />
+                    <Bottle key={bottles.id} bottle={bottle} handleAddToCart={handleAddToCart} />
                 ))
             }
+            </div>
         </div>
     );
 };
